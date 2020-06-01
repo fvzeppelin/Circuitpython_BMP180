@@ -62,8 +62,9 @@ class BMP085(object):
             raise ValueError('Unexpected mode value {0}.  Set mode to one of BMP085_ULTRALOWPOWER, BMP085_STANDARD, BMP085_HIGHRES, or BMP085_ULTRAHIGHRES'.format(mode))
         self._mode = mode
         self._address = address
-        # Create I2C device.
-        i2c = busio.I2C(board.SCL, board.SDA)
+        if (i2c == None):
+            # Create I2C device.
+            i2c = busio.I2C(board.SCL, board.SDA)
         self._device = I2CDevice(i2c, address)
         # Load calibration values.
         self._load_calibration()
